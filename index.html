@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>制作物 — kuuuu33</title>
+<meta name="description" content="つくったものを置いておく場所。ブラウザで動くものを中心に。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="制作物 — kuuuu33">
+<meta property="og:description" content="つくったものを置いておく場所。ブラウザで動くものを中心に。">
+<meta property="og:url" content="https://kuuuu33.github.io/">
+<meta name="twitter:card" content="summary">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23111'/%3E%3Ccircle cx='16' cy='16' r='5' fill='none' stroke='%23fff' stroke-width='2'/%3E%3C/svg%3E">
+
+<style>
+  :root {
+    --bg:      #ffffff;
+    --fg:      #111111;
+    --muted:   #767676;
+    --line:    #e4e4e4;
+    --panel:   #fafafa;
+    --hover:   #111111;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:    #0b0b0b;
+      --fg:    #f2f2f2;
+      --muted: #8d8d8d;
+      --line:  #242424;
+      --panel: #141414;
+      --hover: #f2f2f2;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+                 "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+                 Meiryo, sans-serif;
+    font-size: 16px;
+    line-height: 1.75;
+    letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- header ---------- */
+
+  header {
+    padding: 88px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+  h1 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+  header p {
+    margin: 20px 0 0;
+    max-width: 34em;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  /* ---------- works ---------- */
+
+  .section-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 56px 0 24px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .works {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 32px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  .works > li { display: flex; }
+
+  .work {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    border: 1px solid var(--line);
+    color: inherit;
+    text-decoration: none;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .work:hover,
+  .work:focus-visible {
+    border-color: var(--hover);
+    transform: translateY(-2px);
+  }
+  .work:focus-visible {
+    outline: 2px solid var(--hover);
+    outline-offset: 3px;
+  }
+
+  .cover {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+    color: var(--muted);
+    transition: color .25s ease;
+  }
+  .work:hover .cover { color: var(--fg); }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px 22px 24px;
+  }
+
+  .no {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: .18em;
+    font-variant-numeric: tabular-nums;
+  }
+  .work h2 {
+    margin: 6px 0 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: .01em;
+  }
+  .desc {
+    margin: 8px 0 18px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .meta .sep { opacity: .45; }
+  .meta .go {
+    margin-left: auto;
+    color: var(--fg);
+    transition: transform .25s ease;
+  }
+  .work:hover .go { transform: translateX(4px); }
+
+  /* ---------- footer ---------- */
+
+  footer {
+    margin-top: 96px;
+    padding: 32px 0 72px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    align-items: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer a {
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 1px;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  footer a:hover { color: var(--fg); border-color: var(--fg); }
+  footer .copy { margin-left: auto; }
+
+  @media (max-width: 600px) {
+    header { padding: 56px 0 40px; }
+    .works { grid-template-columns: 1fr; gap: 24px; }
+    footer { margin-top: 64px; }
+    footer .copy { margin-left: 0; width: 100%; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Works</h1>
+    <p>つくったものを置いておく場所です。ブラウザで開いてすぐ動くものを中心に、少しずつ増やしていきます。</p>
+  </header>
+
+  <main>
+    <div class="section-label">
+      <span>公開中</span>
+      <span id="count"></span>
+    </div>
+
+    <ul class="works">
+
+      <!-- ============ 01 プラネタリウム ============ -->
+      <li>
+        <a class="work" href="https://kuuuu33.github.io/planetarium/">
+          <svg class="cover" viewBox="0 0 320 200" fill="none" aria-hidden="true">
+            <g fill="currentColor">
+              <circle cx="52"  cy="42"  r="1.6"/><circle cx="88"  cy="28"  r="1"/>
+              <circle cx="120" cy="55"  r="2.2"/><circle cx="158" cy="34"  r="1.2"/>
+              <circle cx="196" cy="52"  r="1.7"/><circle cx="232" cy="30"  r="1"/>
+              <circle cx="266" cy="60"  r="1.4"/><circle cx="38"  cy="82"  r="1"/>
+              <circle cx="76"  cy="96"  r="1.5"/><circle cx="112" cy="112" r="1"/>
+              <circle cx="150" cy="88"  r="2.6"/><circle cx="188" cy="104" r="1.3"/>
+              <circle cx="224" cy="86"  r="1"/><circle cx="258" cy="108" r="1.8"/>
+              <circle cx="286" cy="84"  r="1"/><circle cx="64"  cy="128"  r="1.2"/>
+              <circle cx="204" cy="132" r="1"/>
+            </g>
+            <g stroke="currentColor" stroke-width="1" opacity=".55">
+              <path d="M120 55 L150 88 L188 104 M150 88 L196 52 M196 52 L232 30"/>
+              <path d="M52 42 L88 28"/>
+            </g>
+            <path d="M0 165 Q160 128 320 165" stroke="currentColor" stroke-width="1" opacity=".5"/>
+          </svg>
+          <div class="body">
+            <span class="no">01</span>
+            <h2>プラネタリウム</h2>
+            <p class="desc">実際の星空をブラウザで再現。星・星座線・天の川・流れ星まで描画し、場所と時間を自由に動かせます。全画面投影対応。</p>
+            <div class="meta">
+              <span>Web</span><span class="sep">/</span><span>2026</span>
+              <span class="go" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <!-- ============ 02 くらげファイト ============ -->
+      <li>
+        <a class="work" href="https://kuuuu33.github.io/kurage-fight/">
+          <svg class="cover" viewBox="0 0 320 200" fill="none" aria-hidden="true"
+               stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M118 96 Q118 58 160 58 Q202 58 202 96 Q180 106 160 106 Q140 106 118 96Z"/>
+            <path d="M132 102 Q126 130 136 152 Q142 166 134 178"/>
+            <path d="M148 105 Q146 134 154 156 Q158 168 150 178"/>
+            <path d="M172 105 Q174 134 166 156 Q162 168 170 178"/>
+            <path d="M188 102 Q194 130 184 152 Q178 166 186 178"/>
+            <g opacity=".45">
+              <path d="M60 78 Q60 62 76 62 Q92 62 92 78 Q76 84 60 78Z"/>
+              <path d="M68 82 Q66 100 72 112"/><path d="M84 82 Q86 100 80 112"/>
+            </g>
+            <g opacity=".3">
+              <path d="M238 122 Q238 110 250 110 Q262 110 262 122 Q250 127 238 122Z"/>
+              <path d="M244 125 Q243 138 247 146"/><path d="M256 125 Q257 138 253 146"/>
+            </g>
+            <g opacity=".35" stroke-width="1">
+              <path d="M0 30 Q80 20 160 30 T320 30"/>
+              <path d="M0 46 Q80 36 160 46 T320 46"/>
+            </g>
+          </svg>
+          <div class="body">
+            <span class="no">02</span>
+            <h2>くらげファイト</h2>
+            <p class="desc">タップでふわっと浮かび、サンゴをよけて真珠を集める育成＆アクションゲーム。クラゲを育て、ずかんを埋めて深海の奥へ。</p>
+            <div class="meta">
+              <span>Game</span><span class="sep">/</span><span>2026</span>
+              <span class="go" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </a>
+      </li>
+
+      <!--
+      ============================================================
+        作品を追加するときは、この <li> ごとコピーして使ってください。
+        変えるのは ①href ②SVGの中身（消して <svg class="cover"></svg>
+        だけにしてもOK） ③番号 ④タイトル ⑤説明 ⑥カテゴリと年
+      ============================================================
+      <li>
+        <a class="work" href="https://kuuuu33.github.io/xxxx/">
+          <svg class="cover" viewBox="0 0 320 200" aria-hidden="true"></svg>
+          <div class="body">
+            <span class="no">03</span>
+            <h2>作品タイトル</h2>
+            <p class="desc">一〜二行の説明。</p>
+            <div class="meta">
+              <span>Web</span><span class="sep">/</span><span>2026</span>
+              <span class="go" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </a>
+      </li>
+      -->
+
+    </ul>
+  </main>
+
+  <footer>
+    <!-- 制作用SNSが用意できたら href を差し替えてください -->
+    <a href="#" rel="me">SNS（準備中）</a>
+    <a href="https://github.com/kuuuu33">GitHub</a>
+    <span class="copy">© 2026 kuuuu33</span>
+  </footer>
+
+</div>
+
+<script>
+  // 作品数はカードから自動で数えるので、追加したときに直す必要はありません
+  document.getElementById('count').textContent =
+    String(document.querySelectorAll('.works .work').length).padStart(2, '0');
+</script>
+</body>
+</html>
