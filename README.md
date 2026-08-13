@@ -106,7 +106,7 @@ IndexedDB のデータベース名も同様に `作品名-save` の形にする�
 
 ## ライセンス
 
-**Copyright (c) 2026 kuuuu33. All Rights Reserved.**
+**Copyright (c) 2026 くぅ. All Rights Reserved.**
 
 閲覧・個人利用・URLの共有は自由です。
 複製・改変・再配布・ミラー公開・自作としての公開・商用利用は、事前の許諾なく行うことを禁じます。
