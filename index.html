@@ -1,4 +1,19 @@
 <!DOCTYPE html>
+<!--
+  Works — kuuuu33
+  https://kuuuu33.github.io/
+
+  Copyright (c) 2026 kuuuu33. All Rights Reserved.
+
+  本サイトおよび掲載作品の著作権は制作者に帰属します。
+  制作者の許諾なく、複製・改変・再配布・再公開すること、
+  および自身の作品として公開することを禁じます。
+
+  Unauthorized copying, modification, redistribution, or republication
+  of this site, in whole or in part, is prohibited.
+
+  お問い合わせ: https://github.com/kuuuu33
+-->
 <html lang="ja">
 <head>
 <meta charset="utf-8">
@@ -245,7 +260,8 @@
     <div class="eyebrow"><span class="dot"></span><span>PORTFOLIO</span></div>
     <h1>Works</h1>
     <p class="lede">暗い画面のなかで、小さく光るものをつくっています。</p>
-    <div class="rule"><i></i><span>2 PROJECTS</span></div>
+    <!-- 数字はカードから自動で数えます（JSが無効なときは下の文字がそのまま出ます） -->
+    <div class="rule"><i></i><span id="count">2 PROJECTS</span></div>
   </header>
 
   <main class="works">
@@ -278,6 +294,33 @@
       <a class="play" href="https://kuuuu33.github.io/planetarium/">ひらく →</a>
     </article>
 
+    <!--
+    ============================================================
+      作品を追加するときは、この <article> ごとコピーして使ってください。
+      変えるのは6か所 — ①href（2か所とも） ②画像とalt ③番号 ④カテゴリ
+      ⑤タイトルと説明 ⑥タグ3つ
+
+      画像は assets/ に入れて、横1200pxくらいのjpgにしてください。
+      class に work--gold を足すと、シアンではなく金の配色になります。
+      1つおきに付けると見た目が単調になりません。
+
+      ヒーローの「2 PROJECTS」は自動で数えるので、直す必要はありません。
+    ============================================================
+    <article class="work reveal">
+      <div class="meta"><span class="num">03</span><span class="kind">GAME / WEB</span></div>
+      <a class="shot" href="https://kuuuu33.github.io/xxxx/">
+        <div class="frame">
+          <img src="assets/xxxx.jpg" width="1200" height="555"
+               alt="作品の画面を説明する文" loading="lazy" decoding="async">
+        </div>
+      </a>
+      <h2>作品タイトル</h2>
+      <p>二〜三行の説明。何ができるか、どこにこだわったかを書く。</p>
+      <div class="tags"><span>タグ1</span><span>タグ2</span><span>タグ3</span></div>
+      <a class="play" href="https://kuuuu33.github.io/xxxx/">あそぶ →</a>
+    </article>
+    -->
+
   </main>
 
   <section class="about reveal">
@@ -301,6 +344,13 @@
 </div>
 
 <script>
+  // ヒーローの作品数を、実際のカード枚数から数える
+  (function () {
+    var n = document.querySelectorAll('.works .work').length;
+    var el = document.getElementById('count');
+    if (el && n) { el.textContent = n + ' PROJECT' + (n === 1 ? '' : 'S'); }
+  })();
+
   (function () {
     var items = document.querySelectorAll('.reveal');
     if (!('IntersectionObserver' in window)) {
