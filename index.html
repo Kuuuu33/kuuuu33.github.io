@@ -27,7 +27,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500&family=Zen+Old+Mincho&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -38,7 +38,7 @@
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--bg)}
   body{
-    color:var(--ink); font-family:var(--gothic); font-weight:300;
+    color:var(--ink); font-family:var(--gothic); font-weight:400;
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   a{color:var(--cyan); text-decoration:none; transition:color .3s ease, border-color .3s ease}
@@ -53,7 +53,7 @@
 
   /* ---- ambience ---- */
   .sky{position:fixed; inset:0; pointer-events:none; z-index:0}
-  .sky i{position:absolute; border-radius:50%; opacity:.2;
+  .sky i{position:absolute; border-radius:50%; opacity:.16;
     background:var(--ink); box-shadow:0 0 5px 1px rgba(230,235,245,.45)}
   .sky i.g{background:var(--gold); box-shadow:0 0 6px 1px rgba(242,208,126,.7)}
   .aurora{position:fixed; top:-20vh; left:50%; width:120vw; height:70vh;
@@ -67,24 +67,24 @@
   .eyebrow{display:flex; align-items:center; gap:12px}
   .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);
     box-shadow:0 0 12px 3px rgba(242,208,126,.7)}
-  .eyebrow span{font-size:11px; letter-spacing:.34em; color:rgba(230,235,245,.5)}
+  .eyebrow span{font-size:11px; font-weight:500; letter-spacing:.3em; color:rgba(230,235,245,.7)}
 
   .hero{min-height:92vh; display:flex; flex-direction:column; justify-content:center;
     gap:40px; padding:120px 0 100px}
   .hero h1{margin:0; font-family:var(--mincho); font-weight:400; font-size:clamp(56px,17vw,72px);
     line-height:1; letter-spacing:.16em;
-    text-shadow:0 0 32px rgba(79,209,219,.45), 0 0 80px rgba(79,209,219,.18)}
-  .lede{margin:0; font-size:15px; line-height:2.2; letter-spacing:.14em;
-    color:rgba(230,235,245,.66); text-wrap:pretty}
+    text-shadow:0 0 28px rgba(79,209,219,.32), 0 0 72px rgba(79,209,219,.12)}
+  .lede{margin:0; font-size:16px; line-height:2.1; letter-spacing:.08em;
+    color:rgba(230,235,245,.88); text-wrap:pretty}
   .rule{display:flex; align-items:center; gap:14px; margin-top:8px}
   .rule i{width:44px; height:1px; background:linear-gradient(90deg,var(--gold),rgba(242,208,126,0))}
-  .rule span{font-size:10px; letter-spacing:.3em; color:rgba(242,208,126,.75)}
+  .rule span{font-size:11px; font-weight:500; letter-spacing:.26em; color:rgba(242,208,126,.95)}
 
   .works{display:flex; flex-direction:column; gap:120px; padding-bottom:140px}
   .work{display:flex; flex-direction:column; gap:28px}
   .meta{display:flex; align-items:baseline; gap:16px}
-  .num{font-family:var(--mincho); font-size:12px; letter-spacing:.24em; color:rgba(242,208,126,.8)}
-  .kind{font-size:10px; letter-spacing:.28em; color:rgba(230,235,245,.4)}
+  .num{font-family:var(--mincho); font-size:13px; letter-spacing:.24em; color:rgba(242,208,126,.95)}
+  .kind{font-size:11px; font-weight:500; letter-spacing:.24em; color:rgba(230,235,245,.65)}
 
   .shot{position:relative; display:block; border-radius:16px; padding:1px; max-width:380px;
     background:linear-gradient(160deg, rgba(79,209,219,.5), rgba(242,208,126,.18) 45%, rgba(230,235,245,.06));
@@ -100,37 +100,37 @@
 
   .work h2{margin:0; font-family:var(--mincho); font-weight:400; font-size:27px;
     letter-spacing:.13em; line-height:1.5}
-  .work p{margin:0; font-size:14px; line-height:2.1; letter-spacing:.1em;
-    color:rgba(230,235,245,.62); text-wrap:pretty}
+  .work p{margin:0; font-size:15px; line-height:2.05; letter-spacing:.04em;
+    color:rgba(230,235,245,.86); text-wrap:pretty}
 
   .tags{display:flex; flex-wrap:wrap; gap:8px}
-  .tags span{font-size:10px; letter-spacing:.18em; border-radius:999px; padding:7px 14px;
-    color:rgba(79,209,219,.85); border:1px solid rgba(79,209,219,.28)}
-  .work--gold .tags span{color:rgba(242,208,126,.85); border-color:rgba(242,208,126,.28)}
+  .tags span{font-size:11px; font-weight:500; letter-spacing:.14em; border-radius:999px; padding:7px 14px;
+    color:var(--cyan); border:1px solid rgba(79,209,219,.42)}
+  .work--gold .tags span{color:var(--gold); border-color:rgba(242,208,126,.42)}
 
-  .play{align-self:flex-start; font-size:12px; letter-spacing:.26em; color:var(--cyan);
-    border-bottom:1px solid rgba(79,209,219,.35); padding-bottom:6px}
+  .play{align-self:flex-start; font-size:13px; font-weight:500; letter-spacing:.2em; color:var(--cyan);
+    border-bottom:1px solid rgba(79,209,219,.55); padding-bottom:6px}
   .play:hover{color:var(--gold); border-color:rgba(242,208,126,.6)}
-  .work--gold .play{color:var(--gold); border-color:rgba(242,208,126,.35)}
+  .work--gold .play{color:var(--gold); border-color:rgba(242,208,126,.55)}
   .work--gold .play:hover{color:var(--cyan); border-color:rgba(79,209,219,.6)}
 
   .about{display:flex; flex-direction:column; gap:26px; padding-bottom:140px}
   .about .rule i{background:linear-gradient(90deg,rgba(79,209,219,.8),rgba(79,209,219,0))}
-  .about .rule span{color:rgba(230,235,245,.45)}
+  .about .rule span{color:rgba(230,235,245,.7)}
   .about h2{margin:0; font-family:var(--mincho); font-weight:400; font-size:24px; letter-spacing:.16em}
-  .about p{margin:0; font-size:14px; line-height:2.2; letter-spacing:.1em;
-    color:rgba(230,235,245,.62); text-wrap:pretty}
+  .about p{margin:0; font-size:15px; line-height:2.05; letter-spacing:.04em;
+    color:rgba(230,235,245,.86); text-wrap:pretty}
   .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px}
-  .links a{font-size:11px; letter-spacing:.22em; color:var(--ink);
-    border:1px solid rgba(230,235,245,.18); border-radius:999px; padding:12px 20px}
+  .links a{font-size:12px; font-weight:500; letter-spacing:.18em; color:var(--ink);
+    border:1px solid rgba(230,235,245,.3); border-radius:999px; padding:12px 20px}
   .links a:hover{color:var(--gold); border-color:rgba(242,208,126,.7)}
 
   footer{display:flex; flex-direction:column; align-items:center; gap:18px;
     border-top:1px solid rgba(230,235,245,.08); padding:48px 0 72px}
   footer .beacon{width:5px; height:5px; border-radius:50%; background:var(--cyan);
     box-shadow:0 0 12px 3px rgba(79,209,219,.6); animation:tw 3.4s ease-in-out infinite}
-  footer .mark{font-family:var(--mincho); font-size:13px; letter-spacing:.32em; color:rgba(230,235,245,.55)}
-  footer small{font-size:10px; letter-spacing:.22em; color:rgba(230,235,245,.3)}
+  footer .mark{font-family:var(--mincho); font-size:14px; letter-spacing:.3em; color:rgba(230,235,245,.75)}
+  footer small{font-size:11px; letter-spacing:.2em; color:rgba(230,235,245,.55)}
 
   /* ---- scroll reveal ---- */
   .reveal{opacity:0}
