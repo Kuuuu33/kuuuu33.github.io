@@ -140,12 +140,15 @@
     border:1px solid rgba(230,235,245,.3); border-radius:999px; padding:12px 20px}
   .links a:hover{color:var(--gold); border-color:rgba(242,208,126,.7)}
 
-  footer{display:flex; flex-direction:column; align-items:center; gap:18px;
+  footer{display:flex; flex-direction:column; align-items:center; gap:12px;
     border-top:1px solid rgba(230,235,245,.08); padding:48px 0 72px}
   footer .beacon{width:5px; height:5px; border-radius:50%; background:var(--cyan);
-    box-shadow:0 0 12px 3px rgba(79,209,219,.6); animation:tw 3.4s ease-in-out infinite}
-  footer .mark{font-family:var(--mincho); font-size:14px; letter-spacing:.3em; color:rgba(230,235,245,.75)}
-  footer small{font-size:11px; letter-spacing:.2em; color:rgba(230,235,245,.55)}
+    box-shadow:0 0 12px 3px rgba(79,209,219,.6); animation:tw 3.4s ease-in-out infinite;
+    margin-bottom:6px}
+  footer .mark{font-family:var(--mincho); font-size:16px; letter-spacing:.3em; color:rgba(230,235,245,.85)}
+  footer small{font-size:11px; letter-spacing:.2em; line-height:1.9; text-align:center;
+    color:rgba(230,235,245,.55); padding:0 20px; text-wrap:balance}
+  footer .copy{margin-top:10px; color:rgba(230,235,245,.36)}
 
   /* ---- scroll reveal ---- */
   .reveal{opacity:0}
@@ -337,8 +340,9 @@
 
   <footer>
     <span class="beacon" aria-hidden="true"></span>
-    <span class="mark">Works</span>
-    <small>&copy; 2026 kuuuu33</small>
+    <span class="mark">くぅ</span>
+    <small>Claudeで作る副業コンテンツ</small>
+    <small class="copy">&copy; 2026 くぅ</small>
   </footer>
 
 </div>
