@@ -2,16 +2,33 @@
 
 制作物をまとめるトップページ。https://kuuuu33.github.io/
 
-単一の `index.html` だけで完結しています（外部依存・ビルド作業なし）。
+`index.html` 1枚と、画像を入れた `assets/` だけで動いています。ビルド作業はありません。
+書体だけ Google Fonts（Zen Old Mincho / Zen Kaku Gothic New）を読み込んでいます。
+
+## 構成
+
+```
+index.html          本体。HTML・CSS・JSが全部入り
+assets/
+  kurage-fight.jpg    作品01のスクリーンショット
+  planetarium.jpg     作品02のスクリーンショット
+  ogp.jpg             SNSシェア時のカード画像（1200×630）
+  favicon-32.png / icon-512.png / apple-touch-icon.png
+LICENSE
+```
 
 ## 作品を追加する手順
 
 1. 作品そのものを別リポジトリで公開する（例: リポジトリ名 `xxxx` → `https://kuuuu33.github.io/xxxx/`）
-2. `index.html` の `<!-- 作品を追加するときは... -->` のコメント内にテンプレートがあるので、`<li>` ごとコピーして貼り付ける
-3. 変えるのは6か所だけ — `href` / サムネイルSVG / 番号 / タイトル / 説明 / カテゴリと年
-4. GitHubに反映する（下記「更新のしかた」参照）。1〜2分で公開ページに出ます
+2. スクリーンショットを撮り、横1200pxくらいのjpgにして `assets/` に入れる
+3. `index.html` の `</main>` の手前にテンプレートがコメントで置いてあるので、`<article>` ごとコピーして貼り付ける
+4. 変えるのは6か所 — `href`（2か所）／画像と `alt`／番号／カテゴリ／タイトルと説明／タグ3つ
+5. GitHubに反映する（下記「更新のしかた」参照）。1〜2分で公開ページに出ます
 
-作品数（右上の `02`）はカードから自動で数えるので、手で直す必要はありません。
+**ヒーローの `2 PROJECTS` は自動で数えるので、手で直す必要はありません。**
+
+配色は1つおきに変えると単調になりません。`<article class="work reveal">` がシアン、
+`<article class="work work--gold reveal">` が金です。
 
 ## 更新のしかた
 
@@ -21,11 +38,11 @@
 ターミナルから push できるようにしたい場合は、アクセストークン（Settings → Developer settings → Personal access tokens、スコープ `repo`）を発行したうえで、
 `git config --global credential.helper osxkeychain` を実行してから push すると、以降は入力不要になります。
 
-## サムネイルについて
+## SNSリンクについて
 
-いまは無彩色のSVG図案です。実際のスクリーンショットに差し替える場合は、
-`images/` に画像を置いて `<svg class="cover">...</svg>` を
-`<img class="cover" src="images/xxxx.png" alt="">` に置き換えてください。
+ABOUT（作った人）に LINE / X / note / GitHub を置いています。
+X と note は制作用アカウント `claude_lab_kuu` です。
+**投資ジャンルの既存Xアカウントとは客層が違うため、ここには載せていません。**
 
 ---
 
@@ -62,7 +79,7 @@ IndexedDB のデータベース名も同様に `作品名-save` の形にする�
 
 | 作品 | 保存 |
 |---|---|
-| くらげファイト | localStorage 16キー、すべて `kurage-` 接頭辞。IndexedDB は `kurage-save` |
+| くらげファイト | localStorage 17キー、すべて `kurage-` 接頭辞。IndexedDB は `kurage-save` |
 | プラネタリウム | 保存なし |
 | まとめサイト | 保存なし |
 
@@ -89,23 +106,21 @@ IndexedDB のデータベース名も同様に `作品名-save` の形にする�
 
 ## ライセンス
 
-**Copyright (c) 2026 kuuuu33. All Rights Reserved.**
+**Copyright (c) 2026 くぅ. All Rights Reserved.**
 
 閲覧・個人利用・URLの共有は自由です。
 複製・改変・再配布・ミラー公開・自作としての公開・商用利用は、事前の許諾なく行うことを禁じます。
 
 詳細は [LICENSE](LICENSE) を参照してください。
 
-新しい作品のリポジトリを作るときは、`LICENSE` と `index.html` 先頭の著作権コメントも一緒にコピーしてください。
+**`index.html` の先頭に著作権コメントを置いています。デザインを作り直すときも消さないでください**
+（一度、作り直しで消えたことがあります）。新しい作品のリポジトリを作るときも、
+`LICENSE` とこのコメントを一緒にコピーしてください。
 
 ### 注意：技術的には防げません
 
-単一HTMLで外部依存がないため、ブラウザの「ページを保存」だけで動作するコピーが手に入ります。
+ブラウザの「ページを保存」だけで動作するコピーが手に入ります。
 これはWebの仕組み上どうにもならないので、上記の表示は**抑止と、無断転載を見つけたときの根拠**という位置づけです。
 
 またリポジトリを Public にしている以上、GitHubの利用規約により**GitHub内でのForkは止められません**。
 気になる場合は https://github.com/kuuuu33?tab=repositories の Fork 数をときどき確認してください。
-
-## TODO
-
-- [ ] フッターの「SNS（準備中）」の `href="#"` を、制作用アカウントのURLに差し替える
