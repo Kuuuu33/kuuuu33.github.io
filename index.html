@@ -57,7 +57,7 @@
     -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
   a{color:var(--cyan); text-decoration:none; transition:color .3s ease, border-color .3s ease}
-  img{display:block; width:100%; height:auto}
+  img,video{display:block; width:100%; height:auto}
   ::selection{background:rgba(79,209,219,.3)}
   :focus-visible{outline:1px solid var(--gold); outline-offset:4px; border-radius:2px}
 
@@ -104,6 +104,8 @@
   .shot{position:relative; display:block; border-radius:16px; padding:1px; max-width:380px;
     background:linear-gradient(160deg, rgba(79,209,219,.5), rgba(242,208,126,.18) 45%, rgba(230,235,245,.06));
     transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+  /* 作品の画面は 16:9。収録した映像をそのまま入れられる比率にしてある */
+  .shot .frame video, .shot .frame img{aspect-ratio:16/9; object-fit:cover}
   .shot .frame{border-radius:15px; overflow:hidden; background:#0B1220;
     box-shadow:0 24px 56px -28px rgba(0,0,0,.9), 0 0 48px -20px rgba(79,209,219,.35);
     transition:box-shadow .5s ease}
@@ -273,8 +275,11 @@
       <div class="meta"><span class="num">01</span><span class="kind">GAME / WEB</span></div>
       <a class="shot" href="https://kuuuu33.github.io/kurage-fight/">
         <div class="frame">
-          <img src="assets/kurage-fight.jpg" width="1200" height="555"
-               alt="くらげファイトのプレイ画面。深い海のなかをクラゲが泳いでいる" loading="lazy" decoding="async">
+          <video class="clip" width="960" height="540" poster="assets/kurage-fight.jpg"
+                 muted loop playsinline preload="none"
+                 aria-label="くらげファイトのプレイ映像。深い海のなかをクラゲが泳いでいる">
+            <source src="assets/kurage-fight.mp4" type="video/mp4">
+          </video>
         </div>
       </a>
       <h2>くらげファイト</h2>
@@ -287,8 +292,11 @@
       <div class="meta"><span class="num">02</span><span class="kind">TOOL / WEB</span></div>
       <a class="shot" href="https://kuuuu33.github.io/planetarium/">
         <div class="frame">
-          <img src="assets/planetarium.jpg" width="1200" height="555"
-               alt="プラネタリウムの画面。星座線と星の名前が描かれた全天の星図" loading="lazy" decoding="async">
+          <video class="clip" width="960" height="540" poster="assets/planetarium.jpg"
+                 muted loop playsinline preload="none"
+                 aria-label="プラネタリウムの映像。星座線と星の名前が描かれた全天の星図が動く">
+            <source src="assets/planetarium.mp4" type="video/mp4">
+          </video>
         </div>
       </a>
       <h2>プラネタリウム</h2>
@@ -301,8 +309,11 @@
       <div class="meta"><span class="num">03</span><span class="kind">GAME / WEB</span></div>
       <a class="shot" href="https://kuuuu33.github.io/hotaru/">
         <div class="frame">
-          <img src="assets/hotaru.jpg" width="1200" height="555"
-               alt="ほたる合わせの画面。夜の森でたくさんの蛍が一斉に光り、左に光の目印がある" loading="lazy" decoding="async">
+          <video class="clip" width="960" height="540" poster="assets/hotaru.jpg"
+                 muted loop playsinline preload="none"
+                 aria-label="ほたる合わせの映像。夜の森でたくさんの蛍が一斉に光る">
+            <source src="assets/hotaru.mp4" type="video/mp4">
+          </video>
         </div>
       </a>
       <h2>ほたる合わせ</h2>
@@ -314,10 +325,14 @@
     <!--
     ============================================================
       作品を追加するときは、この <article> ごとコピーして使ってください。
-      変えるのは6か所 — ①href（2か所とも） ②画像とalt ③番号 ④カテゴリ
-      ⑤タイトルと説明 ⑥タグ3つ
+      変えるのは6か所 — ①href（2か所とも） ②映像・ポスター・aria-label
+      ③番号 ④カテゴリ ⑤タイトルと説明 ⑥タグ3つ
 
-      画像は assets/ に入れて、横1200pxくらいのjpgにしてください。
+      映像とポスターは assets/ に入れて、どちらも 960×540（16:9）にそろえます。
+      ・xxxx.mp4  … 10秒・無音・H.264。1本1MBを目安に
+      ・xxxx.jpg  … 映像の1コマ。読み込み前と自動再生できない環境で出る絵
+      poster を必ず指定すること。これが無いと、再生できない端末で黒い箱になります。
+
       class に work--gold を足すと、シアンではなく金の配色になります。
       1つおきに付けると見た目が単調になりません。
 
@@ -327,8 +342,11 @@
       <div class="meta"><span class="num">03</span><span class="kind">GAME / WEB</span></div>
       <a class="shot" href="https://kuuuu33.github.io/xxxx/">
         <div class="frame">
-          <img src="assets/xxxx.jpg" width="1200" height="555"
-               alt="作品の画面を説明する文" loading="lazy" decoding="async">
+          <video class="clip" width="960" height="540" poster="assets/xxxx.jpg"
+                 muted loop playsinline preload="none"
+                 aria-label="作品の映像を説明する文">
+            <source src="assets/xxxx.mp4" type="video/mp4">
+          </video>
         </div>
       </a>
       <h2>作品タイトル</h2>
@@ -367,6 +385,29 @@
     var n = document.querySelectorAll('.works .work').length;
     var el = document.getElementById('count');
     if (el && n) { el.textContent = n + ' PROJECT' + (n === 1 ? '' : 'S'); }
+  })();
+
+  // 作品の映像は、画面に入っているあいだだけ静かに流す。
+  // 動きを減らす設定の人・通信量を節約したい人には、ポスター画像のまま出す。
+  (function () {
+    var vids = document.querySelectorAll('video.clip');
+    if (!vids.length || !('IntersectionObserver' in window)) return;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    if (reduce || saveData) return;
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) {
+          if (v.preload === 'none') { v.preload = 'auto'; v.load(); }
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});   // 自動再生が拒まれてもポスターが残る
+        } else {
+          v.pause();
+        }
+      });
+    }, { threshold: 0.35 });
+    vids.forEach(function (v) { io.observe(v); });
   })();
 
   (function () {
