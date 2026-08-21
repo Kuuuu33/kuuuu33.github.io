@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claudeで作る「売れるコンテンツ」プロンプト集</title>
+<meta name="description" content="スマホ1台で、有料級コンテンツを1本仕上げるための7つのプロンプト。">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#080D18">
+<style>
+:root{--bg:#080D18;--panel:#0B111D;--line:rgba(150,175,220,.16);
+  --text:#E7ECF7;--muted:#8B98AF;--accent:#3FD8D0;--warm:#FFD46B;--done:#5FD08A}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:64px}
+body{background:var(--bg);color:var(--text);line-height:1.9;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  font-feature-settings:"palt" 1;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px 90px}
+/* ── header ── */
+header{padding:42px 0 8px}
+.eyebrow{font-size:12px;letter-spacing:.14em;color:var(--muted);display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 10px var(--accent);animation:p 3.4s ease-in-out infinite}
+@keyframes p{0%,100%{opacity:.45}50%{opacity:1}}
+h1{margin-top:16px;font-size:clamp(24px,6.2vw,31px);line-height:1.5}
+h1 em{font-style:normal;color:#fff;text-shadow:0 0 22px rgba(63,216,208,.45)}
+.sub{margin-top:14px;color:var(--muted);font-size:14.5px}
+.by{margin-top:10px;color:var(--muted);font-size:13px}
+/* ── sticky nav ── */
+nav{position:sticky;top:0;z-index:20;margin:26px -18px 0;padding:9px 18px;
+  background:rgba(8,13,24,.93);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);overflow-x:auto;-webkit-overflow-scrolling:touch}
+nav ul{display:flex;gap:7px;list-style:none;min-width:max-content}
+nav a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border:1px solid var(--line);border-radius:9px;color:var(--muted);
+  text-decoration:none;font-size:13.5px;font-weight:600;transition:.2s}
+nav a:hover{border-color:rgba(150,175,220,.45);color:var(--text)}
+nav a.on{border-color:var(--accent);color:var(--accent)}
+nav a.ok{border-color:var(--done);color:var(--done);background:rgba(95,208,138,.1)}
+/* ── blocks ── */
+.intro{margin-top:30px;border:1px solid var(--line);border-radius:14px;
+  padding:19px 20px;background:rgba(255,255,255,.025)}
+.intro p{font-size:14.5px;color:var(--muted)}
+.intro p+p{margin-top:12px}
+.intro b{color:var(--text)}
+section{margin-top:56px;scroll-margin-top:64px}
+.num{font-size:12px;letter-spacing:.14em;color:var(--accent)}
+h2{margin-top:8px;font-size:21px;line-height:1.5}
+.lead{margin-top:15px;font-size:15px;color:var(--muted)}
+.box{margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.box header{padding:0;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:11px 14px;border-bottom:1px solid var(--line);font-size:12px;color:var(--muted)}
+button{font:inherit;font-size:12.5px;color:var(--text);cursor:pointer;white-space:nowrap;
+  background:rgba(63,216,208,.13);border:1px solid rgba(63,216,208,.4);
+  border-radius:8px;padding:7px 14px;transition:background .2s}
+button:hover{background:rgba(63,216,208,.24)}
+pre{margin:0;padding:17px 15px;overflow-x:auto;font-size:13.5px;line-height:2;
+  color:#D3DDEC;white-space:pre-wrap;word-break:break-word;font-family:inherit}
+pre::selection,pre *::selection{background:rgba(63,216,208,.32)}
+.tip{margin-top:17px;border-left:2px solid var(--warm);padding:2px 0 2px 14px}
+.tip b{display:block;font-size:13px;color:var(--warm);letter-spacing:.04em}
+.tip p{margin-top:5px;font-size:14.5px;color:var(--muted)}
+.mark{margin-top:18px}
+.mark button{background:transparent;border-color:var(--line);color:var(--muted);width:100%;padding:11px}
+.mark button.ok{border-color:var(--done);color:var(--done);background:rgba(95,208,138,.09)}
+/* ── outro ── */
+.outro{margin-top:66px;padding-top:30px;border-top:1px solid var(--line)}
+.outro h2{font-size:19px}
+.outro p{margin-top:14px;font-size:15px}
+.outro p.m{color:var(--muted);font-size:14.5px}
+footer{margin-top:44px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:13px;color:var(--muted)}
+footer a{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(63,216,208,.35)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">くぅ ／ プロンプト集</p>
+  <h1>Claudeで作る<br><em>「売れるコンテンツ」</em>プロンプト集</h1>
+  <p class="sub">スマホ1台で、有料級コンテンツを1本仕上げるための7つのプロンプト</p>
+  <p class="by">くぅ｜Claudeで作る副業コンテンツ</p>
+</header>
+
+<nav><ul>
+  <li><a href="#s1" data-n="1">1</a></li><li><a href="#s2" data-n="2">2</a></li>
+  <li><a href="#s3" data-n="3">3</a></li><li><a href="#s4" data-n="4">4</a></li>
+  <li><a href="#s5" data-n="5">5</a></li><li><a href="#s6" data-n="6">6</a></li>
+  <li><a href="#s7" data-n="7">7</a></li>
+</ul></nav>
+
+<div class="intro">
+  <p><b>このプロンプト集は、上から順番に使うだけで、コンテンツが1本完成するように設計されています。</b></p>
+  <p>バラバラに使っても効果はありますが、1→7の順に流すと威力が変わります。所要時間の目安は60〜90分。すべてスマホで完結します。</p>
+  <p><b>【 最初に必ず読んでください 】</b><br>
+  プロンプトの《 》の中を、あなたの状況に書き換えてから使ってください。ここを埋めずに使うと、一般論しか返ってきません。</p>
+  <p><b>AIの精度は、渡した情報の具体性で決まります。</b></p>
+</div>
+
+<section id="s1">
+  <p class="num">STEP 1</p>
+  <h2>悩みを「1つ」に絞る</h2>
+  <p class="lead">多くの人が失敗するのがここ。<br>「副業で稼ぎたい人向け」では、誰にも刺さりません。<br>まず、狙う悩みを1つに絞り込みます。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p1">コピー</button></header>
+<pre id="p1">あなたは、コンテンツマーケティングの専門家です。
+
+私は《 例：副業を始めたけど成果が出ていない人 》に向けて、
+《 例：AIを使ったコンテンツ制作 》をテーマにコンテンツを作ろうとしています。
+
+この読者が抱えている「具体的な悩み」を、30個挙げてください。
+
+条件：
+・「稼げない」のような曖昧な表現は禁止
+・読者が心の中で実際につぶやいている言葉で書く
+・悩みの深さ（軽い〜深刻）を★1〜5で表示
+・検索されやすさではなく「夜眠れなくなるほど気にしていること」を優先
+
+最後に、30個の中から「コンテンツにすると最も売れやすい悩み」を1つ選び、
+その理由を教えてください。</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>返ってきた30個を眺めて、「あ、これ自分も悩んだ」と思うものを選んでください。自分が通った道が、最も熱量高く書けます。</p></div>
+  <div class="mark"><button data-done="1">ここまで終わった</button></div>
+</section>
+
+<section id="s2">
+  <p class="num">STEP 2</p>
+  <h2>悩みを「本人より上手く」言語化する</h2>
+  <p class="lead">読者が「そう、それが言いたかった」と感じた瞬間、信頼が生まれます。<br>ここが有料コンテンツの心臓部です。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p2">コピー</button></header>
+<pre id="p2">あなたは、読者の心理を深く理解したコピーライターです。
+
+テーマ：《 STEP1で選んだ悩み 》
+
+この悩みを抱えている人について、次の3つを言語化してください。
+
+1. 【表面の悩み】本人が口に出して言うこと
+2. 【本当の悩み】本人も気づいていない、根っこにある感情
+3. 【諦めの言葉】この人が自分に言い聞かせている言い訳
+
+そのうえで、この人が読んだ瞬間に
+「なんで自分の状況が分かるの？」と感じる一文を、5パターン作ってください。
+
+条件：
+・きれいな言葉ではなく、生々しい言葉を使う
+・一文は40文字以内
+・上から目線、説教くさい表現は禁止</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>ここで出た「一文」は、そのままSNS投稿の1行目（フック）に使えます。コンテンツ制作と集客が同時に進みます。</p></div>
+  <div class="mark"><button data-done="2">ここまで終わった</button></div>
+</section>
+
+<section id="s3">
+  <p class="num">STEP 3</p>
+  <h2>解決の手順を「再現できる粒度」に分解する</h2>
+  <p class="lead">「頑張りましょう」で終わるコンテンツは売れません。<br>読者がその日のうちに動ける形まで割ります。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p3">コピー</button></header>
+<pre id="p3">あなたは、初心者向け教材の設計者です。
+
+読者：《 STEP1で決めた読者 》
+悩み：《 STEP2で言語化した悩み 》
+解決手段：《 例：Claudeを使ったコンテンツ制作 》
+
+この悩みを解決するための手順を、5〜7ステップに分解してください。
+
+各ステップに以下を含めてください：
+・ステップ名（動詞で終わる、具体的なもの）
+・なぜこれが必要か（1行）
+・具体的に何をするか（初心者が迷わない粒度で）
+・ここでつまずく人が多いポイント
+
+条件：
+・「意識する」「心がける」など、行動できない表現は禁止
+・専門用語を使う場合は、その場で説明を入れる
+・全ステップを合計3時間以内で実行できる分量にする</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>「つまずくポイント」が入ると、一気に“分かってる人”の文章になります。ここは絶対に削らないでください。</p></div>
+  <div class="mark"><button data-done="3">ここまで終わった</button></div>
+</section>
+
+<section id="s4">
+  <p class="num">STEP 4 ／ 最重要</p>
+  <h2>自分の体験を掘り起こす</h2>
+  <p class="lead">このプロンプトが、7つの中で最も重要です。<br>ここを飛ばすと、AIっぽい薄いコンテンツになります。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p4">コピー</button></header>
+<pre id="p4">あなたは、聞き上手なインタビュアーです。
+
+私は今から《 STEP1で決めたテーマ 》についてコンテンツを書きます。
+そこに、私自身の体験談を入れて説得力を持たせたいです。
+
+私の体験を引き出すための質問を、10個してください。
+
+条件：
+・一度に1問ずつ聞いてください（私が答えたら次の質問へ）
+・抽象的な質問（「どう思いましたか？」）は禁止
+・失敗した瞬間、諦めかけた瞬間、変わったきっかけを掘る質問を入れる
+・数字や情景が出てくるような聞き方をする
+
+10問終わったら、私の回答をもとに
+「コンテンツに使えるエピソード」を3つ選んで、
+それぞれをどのステップに挿入すべきか教えてください。</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>質問に答えるのが面倒なときは、音声入力でOKです。話し言葉のままで大丈夫。Claudeが整えてくれます。</p></div>
+  <div class="mark"><button data-done="4">ここまで終わった</button></div>
+</section>
+
+<section id="s5">
+  <p class="num">STEP 5</p>
+  <h2>本文を執筆する</h2>
+  <p class="lead">ここまでの材料をもとに、一気に書き上げます。<br>セクションごとに生成するのが失敗しないコツです。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p5">コピー</button></header>
+<pre id="p5">あなたは、読者に寄り添う文章のプロです。
+
+以下の材料をもとに、コンテンツの本文を書いてください。
+
+・読者：《 STEP1 》
+・悩み：《 STEP2で言語化した内容 》
+・手順：《 STEP3のステップ 》
+・私の体験：《 STEP4で出たエピソード 》
+
+今回書くのは《 ステップ◯ 》の部分です。
+
+条件：
+・文体：ですます調、親しみやすく、でも媚びない
+・1文は60文字以内。3〜4文で改行を入れる
+・「〜だと思います」を多用しない（断定する）
+・具体例を必ず1つ入れる
+・読者の反論を1つ想定し、その場で潰す
+・1000〜1500文字
+
+書き終えたら、最後に
+「このセクションで読者が得た変化」を1行でまとめてください。</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>一度に全部書かせず、セクションごとに区切る。長文を一気に出させると、後半が薄くなります。</p></div>
+  <div class="mark"><button data-done="5">ここまで終わった</button></div>
+</section>
+
+<section id="s6">
+  <p class="num">STEP 6</p>
+  <h2>反論を潰して、質を1段上げる</h2>
+  <p class="lead">AIは基本的に褒めてきます。<br>あえて反論させることで、初めて壁打ち相手になります。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p6">コピー</button></header>
+<pre id="p6">以下の文章を読んで、あなたは「懐疑的な読者」になりきってください。
+
+《 ここに文章を貼る 》
+
+その立場から、次を出してください。
+
+1. この文章に対する反論、ツッコミを5つ
+2. 「それ、他でも言われてるよね」と思われる部分
+3. 読み飛ばされそうな箇所
+4. 信頼性が足りず「本当に？」と思われる箇所
+
+そのうえで、
+上記をすべて解消した改善版を書き直してください。
+
+条件：
+・忖度なしで指摘する
+・褒めるコメントは不要</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>これを1回通すだけで、文章の説得力が体感で倍になります。面倒でも必ずやってください。</p></div>
+  <div class="mark"><button data-done="6">ここまで終わった</button></div>
+</section>
+
+<section id="s7">
+  <p class="num">STEP 7</p>
+  <h2>タイトルと「次の一歩」を作る</h2>
+  <p class="lead">どれだけ中身が良くても、タイトルで読まれなければゼロ。<br>最後に導線を整えます。</p>
+  <div class="box">
+    <header><span>プロンプト</span><button data-copy="p7">コピー</button></header>
+<pre id="p7">あなたは、セールスコピーの専門家です。
+
+コンテンツの内容：《 完成した本文の要約を貼る 》
+読者：《 STEP1の読者 》
+
+以下を作ってください。
+
+【タイトル案 10個】
+・数字を入れたもの、逆説のもの、悩みを言い当てるもの をそれぞれ含める
+・煽りすぎず、でもスルーされない温度感
+・30文字以内
+
+【冒頭の3行】
+・読者が「自分のことだ」と感じる書き出し
+
+【最後のCTA（次の一歩）】
+・読者が今日中にできる行動を1つ提案する
+・押し売りにならない自然な流れで
+
+最後に、タイトル10個の中から
+「最もクリックされそうなもの」を1つ選び、理由を教えてください。</pre>
+  </div>
+  <div class="tip"><b>◎ コツ</b><p>タイトルは投稿してから変えてもOKです。反応が悪ければ差し替える前提で、気楽にいきましょう。</p></div>
+  <div class="mark"><button data-done="7">ここまで終わった</button></div>
+</section>
+
+<div class="outro">
+  <h2>おわりに</h2>
+  <p>この7ステップを順番に回せば、スマホだけで有料級のコンテンツが1本完成します。</p>
+  <p>大事なのは、AIに「書かせる」のではなく、AIと「作る」こと。</p>
+  <p>STEP4（あなたの体験）だけは、どんなに優秀なAIでも代わりに用意できません。逆に言えば、そこさえ入れば、あなたのコンテンツは他の誰にも真似できないものになります。</p>
+  <p>まずは1本、作ってみてください。</p>
+  <p class="m">つまずいたら、LINEにそのまま送ってください。「STEP4が難しい」の一言でOKです。</p>
+</div>
+
+<footer>
+  くぅ｜Claudeで作る副業コンテンツ<br>
+  スマホ1台で「売れるコンテンツ」を作る方法を、実演で公開しています。
+</footer>
+
+</div>
+<script>
+// コピー（クリップボードAPIが使えない環境では選択にフォールバック）
+document.querySelectorAll("button[data-copy]").forEach(function(b){
+  var label=b.textContent;
+  function flash(m,ms){b.textContent=m;setTimeout(function(){b.textContent=label;},ms||1600);}
+  function fallback(el){
+    try{var r=document.createRange();r.selectNodeContents(el);
+      var s=window.getSelection();s.removeAllRanges();s.addRange(r);
+      flash("長押しでコピー",3200);
+    }catch(e){flash("選択してコピーしてください",3200);}
+  }
+  b.addEventListener("click",function(){
+    var el=document.getElementById(b.dataset.copy);
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(el.textContent)
+        .then(function(){flash("コピーしました");})
+        .catch(function(){fallback(el);});
+    }else{fallback(el);}
+  });
+});
+// 進捗（どこまでやったかを端末に保存）
+var KEY="prompts:done";
+var done=(function(){try{return JSON.parse(localStorage.getItem(KEY))||{};}catch(e){return {};}})();
+function paint(){
+  document.querySelectorAll("button[data-done]").forEach(function(b){
+    var n=b.dataset.done,on=!!done[n];
+    b.classList.toggle("ok",on);
+    b.textContent=on?"✓ 終わりました":"ここまで終わった";
+    var a=document.querySelector('nav a[data-n="'+n+'"]');
+    if(a)a.classList.toggle("ok",on);
+  });
+}
+document.querySelectorAll("button[data-done]").forEach(function(b){
+  b.addEventListener("click",function(){
+    var n=b.dataset.done;
+    done[n]=!done[n];
+    try{localStorage.setItem(KEY,JSON.stringify(done));}catch(e){}
+    paint();
+  });
+});
+paint();
+// 現在位置をナビに反映
+var secs=[].slice.call(document.querySelectorAll("section"));
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    var a=document.querySelector('nav a[href="#'+e.target.id+'"]');
+    if(a)a.classList.toggle("on",e.isIntersecting);
+  });
+},{rootMargin:"-45% 0px -45% 0px"});
+secs.forEach(function(s){io.observe(s);});
+</script>
+</body>
+</html>
