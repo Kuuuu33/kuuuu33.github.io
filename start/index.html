@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>くぅ｜Claudeでつくる</title>
+<meta name="description" content="プログラミング未経験のまま、Claude Codeでブラウザゲームを3本つくりました。あそべます。作り方も読めます。">
+<meta name="theme-color" content="#080D18">
+<link rel="canonical" href="https://kuuuu33.github.io/start/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="くぅ｜Claudeでつくる">
+<meta property="og:description" content="プログラミング未経験のまま、Claude Codeでブラウザゲームを3本つくりました。">
+<meta property="og:url" content="https://kuuuu33.github.io/start/">
+<meta property="og:image" content="https://kuuuu33.github.io/start/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* ---------------------------------------------------------------
+   /start/ — Instagram プロフィールリンクの着地点
+   トーン：作品コンテンツ側（＝「暗くて、光る」のまま）
+   このページではDMMに一切触れないため、光彩表現を使ってよい。
+   DMMに触れる面（記事アイキャッチ・PRカルーセル）は別トンマナ。
+   外部リクエストゼロ（画像・Webフォントなし）で1秒以内に出す。
+----------------------------------------------------------------- */
+:root{
+  --bg:#080D18;
+  --panel:#0E1524;
+  --line:rgba(150,175,220,.16);
+  --text:#E7ECF7;
+  --muted:#8B98AF;
+  --kurage:#3FD8D0;
+  --hoshi:#93A9FF;
+  --hotaru:#FFD46B;
+  --line-green:#5FD08A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  min-height:100svh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  font-feature-settings:"palt" 1;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+/* 背景の光。画像を使わずCSSだけでゆっくり漂わせる */
+body::before,body::after{
+  content:"";position:fixed;inset:-30%;z-index:0;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(63,216,208,.13),transparent 70%);
+  animation:drift 26s ease-in-out infinite alternate;
+}
+body::after{
+  background:radial-gradient(closest-side,rgba(147,169,255,.12),transparent 70%);
+  animation-duration:34s;animation-direction:alternate-reverse;
+}
+@keyframes drift{
+  from{transform:translate3d(-14%,-10%,0) scale(.92)}
+  to{transform:translate3d(12%,8%,0) scale(1.08)}
+}
+.wrap{
+  position:relative;z-index:1;
+  max-width:480px;margin:0 auto;
+  min-height:100svh;display:flex;flex-direction:column;
+  padding:max(22px,env(safe-area-inset-top)) 20px max(20px,env(safe-area-inset-bottom));
+}
+/* --- header --- */
+.eyebrow{
+  font-size:12px;letter-spacing:.14em;color:var(--muted);
+  display:flex;align-items:center;gap:8px;
+}
+.eyebrow::before{
+  content:"";width:6px;height:6px;border-radius:50%;
+  background:var(--kurage);box-shadow:0 0 10px var(--kurage);
+  animation:pulse 3.4s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:.45}50%{opacity:1}}
+h1{
+  margin-top:14px;
+  font-size:clamp(25px,7.4vw,32px);
+  line-height:1.42;font-weight:700;letter-spacing:.01em;
+}
+h1 em{
+  font-style:normal;color:#fff;
+  text-shadow:0 0 22px rgba(147,169,255,.55);
+}
+.lead{margin-top:12px;font-size:13.5px;color:var(--muted)}
+/* --- cards --- */
+.cards{margin-top:26px;display:flex;flex-direction:column;gap:13px}
+.card{
+  display:block;width:100%;text-align:left;text-decoration:none;color:inherit;
+  background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(255,255,255,.012));
+  border:1px solid var(--line);border-radius:15px;
+  padding:16px 46px 16px 17px;position:relative;
+  font:inherit;cursor:pointer;
+  transition:border-color .25s,transform .25s,background .25s;
+}
+.card::after{
+  content:"";position:absolute;right:18px;top:50%;
+  width:7px;height:7px;border-right:1.5px solid var(--muted);border-top:1.5px solid var(--muted);
+  transform:translateY(-50%) rotate(45deg);transition:transform .25s,border-color .25s;
+}
+.card:hover,.card:focus-visible{
+  border-color:rgba(150,175,220,.4);
+  background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  outline:none;
+}
+.card:hover::after,.card:focus-visible::after{border-color:var(--text);transform:translateY(-50%) rotate(45deg) translate(2px,-2px)}
+.card:active{transform:scale(.985)}
+.card .t{font-size:17px;font-weight:700;display:flex;align-items:center;gap:9px}
+.card .t::before{
+  content:"";width:7px;height:7px;border-radius:50%;flex:none;
+  background:currentColor;box-shadow:0 0 12px currentColor;
+}
+.card .s{margin-top:4px;font-size:12.5px;color:var(--muted);line-height:1.6}
+#c-play .t{color:var(--kurage)}
+#c-read .t{color:var(--hoshi)}
+#c-line .t{color:var(--line-green)}
+/* あそぶ：タップで3作品を展開（初期表示はスクロールなしで3枚見せるため畳む） */
+#c-play[aria-expanded="true"]::after{transform:translateY(-50%) rotate(135deg)}
+.games{
+  display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .34s ease,opacity .3s;opacity:0;
+}
+.games[data-open="1"]{grid-template-rows:1fr;opacity:1}
+.games>div{overflow:hidden;min-height:0}
+.games ul{list-style:none;padding:9px 0 2px;display:flex;flex-direction:column;gap:8px}
+.game{
+  display:flex;align-items:baseline;gap:10px;text-decoration:none;color:var(--text);
+  border:1px solid var(--line);border-radius:12px;padding:12px 15px;
+  background:rgba(255,255,255,.02);font-size:14.5px;font-weight:600;
+  transition:border-color .2s,background .2s;
+}
+.game:hover,.game:focus-visible{border-color:rgba(150,175,220,.4);background:rgba(255,255,255,.05);outline:none}
+.game span{font-size:11.5px;font-weight:400;color:var(--muted)}
+#g1{box-shadow:inset 2px 0 0 var(--kurage)}
+#g2{box-shadow:inset 2px 0 0 var(--hoshi)}
+#g3{box-shadow:inset 2px 0 0 var(--hotaru)}
+/* --- footer --- */
+footer{
+  margin-top:auto;padding-top:24px;
+  display:flex;gap:18px;flex-wrap:wrap;align-items:center;
+  font-size:12px;color:var(--muted);
+}
+footer a{color:var(--muted);text-decoration:none;border-bottom:1px solid transparent;transition:color .2s,border-color .2s}
+footer a:hover,footer a:focus-visible{color:var(--text);border-bottom-color:var(--line);outline:none}
+footer .sig{margin-left:auto;letter-spacing:.1em}
+@media (prefers-reduced-motion:reduce){
+  *,body::before,body::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main class="wrap">
+
+  <header>
+    <p class="eyebrow">くぅ ／ Claudeでつくる</p>
+    <h1>ぜんぶ、<em>Claude</em>と<br>作りました。</h1>
+    <p class="lead">プログラミングは未経験のまま始めています。<br>ブラウザですぐ、あそべます。</p>
+  </header>
+
+  <nav class="cards">
+
+    <button class="card" id="c-play" type="button" aria-expanded="false" aria-controls="games">
+      <span class="t">あそぶ</span>
+      <span class="s">つくった3本。インストール不要</span>
+    </button>
+
+    <div class="games" id="games" role="region" aria-labelledby="c-play"><div>
+      <ul>
+        <li><a class="game" id="g1" href="https://kuuuu33.github.io/kurage-fight/?ref=ig">くらげファイト<span>育てて、たたかう</span></a></li>
+        <li><a class="game" id="g2" href="https://kuuuu33.github.io/planetarium/?ref=ig">プラネタリウム<span>今夜の星をひらく</span></a></li>
+        <li><a class="game" id="g3" href="https://kuuuu33.github.io/hotaru/?ref=ig">ほたる合わせ<span>明滅を、そろえる</span></a></li>
+      </ul>
+    </div></div>
+
+    <!-- 主力記事＝記事①へ直リンク（2026-08-21 差し替え済み） -->
+    <a class="card" id="c-read" href="https://note.com/claude_lab_kuu/n/n8d60d5574f5e?ref=ig">
+      <span class="t">作り方を読む</span>
+      <span class="s">どう頼んで、どこでつまずいたか</span>
+    </a>
+
+    <a class="card" id="c-line" href="https://lin.ee/PlmHls6">
+      <span class="t">テンプレを受け取る</span>
+      <span class="s">3本目で使った実装指示書の型</span>
+    </a>
+
+  </nav>
+
+  <footer>
+    <a href="https://kuuuu33.github.io/?ref=ig">Works</a>
+    <a href="https://x.com/claude_lab_kuu" rel="me">X</a>
+    <span class="sig">くぅ</span>
+  </footer>
+
+</main>
+<script>
+(function(){
+  var b=document.getElementById('c-play'),g=document.getElementById('games');
+  b.addEventListener('click',function(){
+    var open=b.getAttribute('aria-expanded')==='true';
+    b.setAttribute('aria-expanded',String(!open));
+    if(open){g.removeAttribute('data-open');}else{g.setAttribute('data-open','1');}
+  });
+})();
+</script>
+</body>
+</html>
